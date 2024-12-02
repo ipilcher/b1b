@@ -1,0 +1,8 @@
+# This image must be built from the root directory of the project, i.e.
+# podman build -f oci/Containerfile .
+
+FROM fedora:latest
+
+RUN --mount=type=bind,source=./oci/,target=/oci/,Z dnf -y install /oci/libsavl.x86_64.rpm libmnl && dnf clean all
+COPY src/b1b /usr/local/bin/
+ENTRYPOINT /usr/local/bin/b1b --stderr --debug
