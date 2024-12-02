@@ -44,3 +44,16 @@ any listed interface does not meet these criteria.)
 If no interfaces are listed, `b1b` will automatically detect and
 monitor all mode 1 bond interfaces that are attached to a bridge.  (If no such
 interfaces exist on the system, `b1b` will exit with an error status.)
+
+### Limitations
+
+`b1b` does have some limitations.
+
+* It does not detect changes in network configuration.  If a new bond or bridge
+  is added, `b1b` must be restarted to detect the change.
+
+* IP multicast is not supported.  `b1b` maintains connectivity to virtual
+  machine (or other virtual interface attached to a bridge) by sending
+  gratuitous ARP responses when it detects a link failover event.  This updates
+  the MAC forwarding tables in the switches to which the host is attached, but
+  it does not update multicast forwarding tables.
