@@ -1,5 +1,10 @@
 # B1B - Bonding mode 1 bridge daemon
 
+###
+
+See [this Red Hat Bugzilla comment](https://bugzilla.redhat.com/show_bug.cgi?id=1381110#c0 )
+for a description of the issue that this daemon addresses.
+
 ### Building
 
 B1B requires the `json-c` and `libmnl` libraries, which should already be
