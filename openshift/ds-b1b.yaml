@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: b1b
+  namespace: b1b
+spec:
+  selector:
+    matchLabels:
+      name: b1b
+  template:
+    annotations:
+      openshift.io/required-scc: privileged
+    metadata:
+      labels:
+        name: b1b
+    spec:
+      serviceAccountName: b1b
+      containers:
+      - image:       <========== container image URL goes here
+        name: b1b
+        securityContext:
+          capabilities:
+            add:
+            - CAP_NET_RAW
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /run/openvswitch
+          name: run-openvswitch
+          readOnly: true
+      hostNetwork: true
+      hostPID: true
+      volumes:
+      - hostPath:
+          path: /run/openvswitch
+          type: Directory
+        name: run-openvswitch
